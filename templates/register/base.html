@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'site.css' %}">
+
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <ul class="nav navbar-nav">
+            {# Django Home Link / Admin Link / Register Link#}
+            <li><a class="navbar-brand" href="{% url 'index' %}">DJANGO</a></li>
+            {% if user.is_staff %}
+            <li><a class="navbar-link" href="{% url 'admin:index' %}">Admin</a></li>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <li style="margin-top: 13px;"><form method="post" action="{% url 'index' %}">
+                {% csrf_token %}
+                <input type="search" placeholder="Search.." name="search">
+                <button type="submit"><i class="fa fa-search"></i></button>
+            </form></li>
+
+            {% else %}
+            <li><a class="navbar-link" href="{% url 'register:register' %}">Register</a></li>
+            <li><a class="navbar-link" href="{% url 'register:user_login' %}">Login</a></li>
+            {% endif %}
+
+        </ul>
+        {% if user.is_authenticated %}
+        <div class="usr-info">{{user}}</div>
+        {% endif %}
+    </div>
+</nav>
+<div class="container-main">
+    {% block body_block %}
+    {% endblock %}
+</div>
+</body>
+</html>

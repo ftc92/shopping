@@ -1,0 +1,21 @@
+{% extends "register/base.html" %}
+{% block body_block %}
+<div class="row product-list">
+    {% for p in products %}
+    <div class="prod-item col-md-3">
+        <div class="prod-img">
+            <img src={{p.image}} />
+        </div>
+        <div class="prod-name">
+            <a target="_blank" href={{p.href}}>{{p.name}}</a>
+        </div>
+        <div class="prod-price">
+            <span class="prod-price">Rs. {{p.price}}</span>
+            <span class="prod-site pull-right">{{p.site}}</span>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

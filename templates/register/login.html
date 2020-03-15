@@ -1,0 +1,21 @@
+
+{% extends 'register/base.html' %}
+{% block body_block %}
+<div class="container">
+    <div class="jumbotron jumbotron-center">
+        <h2>Login</h2>
+        <form method="post" action="{% url 'register:user_login' %}">
+            {% csrf_token %}
+            {# A more "HTML" way of creating the login form#}
+            <p>
+<!--                <label for="username">Username:</label>-->
+            <input type="text" name="username" placeholder="Username"></p>
+            <p>
+<!--                <label for="password">Password:</label>-->
+            <input type="password" name="password" placeholder="Password"></p>
+            <p>{{error}}</p>
+            <input class="btn btn-primary" type="submit" name="" value="Login">
+        </form>
+    </div>
+</div>
+{% endblock %}
